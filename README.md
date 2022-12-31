@@ -1,5 +1,5 @@
-# SECOND YEAR SPPU COMP - PICT
-# Rohan Doshi
+# SECOND YEAR SEM I SPPU COMP - PICT
+# VEDANT AHER
 
 List of Available Assignments:
 
