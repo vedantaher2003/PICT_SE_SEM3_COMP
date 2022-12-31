@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+
+class Complex{
+public:
+	int real;
+	int img;
+
+	Complex(int x = 0, int y = 0)
+	{
+		real = x;
+		img = y;
+	}
+
+	Complex add(Complex x)
+	{
+		Complex temp;
+		temp.real= real + x.real;
+		temp.img = img + x.img;
+		return temp;
+	}
+
+	Complex multi(Complex x)
+	{
+		Complex temp;
+		temp.real = real * x.real - img * x.img;
+		temp.img = img * x.real + real *x.img;
+		return temp;
+	}
+
+	void display()
+	{
+		cout << real << " + " << img << "i" << endl;
+	}
+};
+
+
+
+int main()
+{
+	Complex C1(10, 12);
+	C1.display();
+	Complex C2(15, 17);
+	C2.display();
+	Complex C3;
+	C3 = C1.add(C2);
+	C3.display();
+	Complex C4;
+	C4 = C1.multi(C2);
+	C4.display();
+
+	return 0;
+}
+
+
+
+
+
+
+

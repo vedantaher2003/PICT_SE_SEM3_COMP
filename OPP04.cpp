@@ -1,0 +1,50 @@
+#include<iostream>
+#include<string>
+#include<fstream>
+
+using namespace std;
+
+class Student{
+
+public:
+
+	string name ;
+	int rollno ;
+
+	Student(){
+		name = "";
+		rollno = 0;
+	}
+
+	void accept(){
+		cout<<"\nEnter your name: ";
+		cin>>name;
+		cout<<"Enter your roll no.: ";
+		cin>>rollno;
+	}
+	void display(){
+		cout<<"\nName: "<<name<<endl;
+		cout<<"Roll no.: "<<rollno<<endl;
+	}
+};
+
+int main(){
+	int n;
+	cout<<"Enter no. of students: ";
+	cin>>n;
+	Student s[n];
+	fstream f;
+	f.open("test.txt",ios::out);
+	for(int i=0;i<n;i++){
+    	s[i].accept();
+	}
+	f.write((char*)&s, sizeof(s));
+	f.close();
+	f.open("test.txt",ios::in);
+	f.read((char*)&s, sizeof(s));
+	for(int i=0;i<n;i++){
+    	s[i].display();
+	}
+	f.close();
+	return 0;
+}
