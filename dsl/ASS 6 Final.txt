@@ -1,0 +1,52 @@
+ASS 6 Final
+
+class sorting:
+    def __init__(self, input):
+        self.arr = input
+
+    def partition(self, l, h, arr):
+        pivot = arr[h]
+        i = l - 1
+        for a in range(l, h):
+            if (arr[a] <= pivot):
+                i += 1
+                arr[i], arr[a] = arr[a], arr[i]
+        arr[i + 1], arr[h] = arr[h], arr[i + 1]
+        return i + 1
+
+    def quick(self, arr, l, h):
+        if (l < h):
+            part = self.partition(l, h, arr)
+            # applying quick sort for left of pivot
+            self.quick(arr, l, part - 1)
+            # applying quick sort for right of pivot
+            self.quick(arr, part + 1, h, )
+
+    def top_five(self):
+        n = len(arr)
+        for i in range(n - 1, -1, -1):
+            print(arr[i])
+
+
+arr = []
+s = sorting(arr)
+while (1 > 0):
+    print("----Menu----")
+    print("1.Take first year percentage as input:")
+    print("2.Top five percentage display:")
+    print("3. Exit\n")
+    ch = int(input("Enter choice from 1 to 3:"))
+    if (ch == 1):
+        n = int(input("Enter no of students :"))
+        arr = []
+        for i in range(n):
+            ele = float(input("Enter percentage:"))
+            arr.append(ele)
+    elif (ch == 2):
+        size = len(arr)
+        s.quick(arr, 0, size - 1)
+        print("Top five percentage are:")
+        s.top_five()
+    elif (ch == 3):
+        print("invalid choice.")
+        break

@@ -1,0 +1,103 @@
+ASS 4 Final
+
+class search:
+    def __init__(self,input):
+        self.input=arr
+
+        
+    def linear(self):
+        for i in range(len(arr)):
+            if arr[i]==x:
+                return("Element",x," is found at position :",i)
+  
+    
+                
+    def sentinal(self):
+        last=arr[n-1]
+        arr[n-1]=x
+        i=0
+        while (arr[i]!=x):
+            i+=1
+        arr[n-1]=last    
+        if((i<n-1) or x==arr[n-1]):
+            return("Element",x," is found at position :",i)
+        #     break
+        # return "Element not found"
+           
+            
+    def binary(self):  
+        s=0
+        e=n-1
+        m=0
+        while(e-s>0):
+            m=(s+e)//2
+            if(arr[m]<x):
+                s=m+1 
+            else:
+                e=m        
+        if(arr[e]==x):
+            return("Found at index",e)
+        elif(arr[s]==x):
+            return("Found at index",s)
+        else:
+            return("Not found")              
+        # print("Element not found")"Position of element after binary search:"
+                # print("Element Not found")
+    def fibonaaci(self):
+        f0=0
+        f1=1
+        f=f0+f1
+        while (f<n):
+            f0=f1
+            f1=f
+            f=f0+f1
+        d=-1                # d is decision parameter here
+        while(f>1):
+            m=min(d+f0,n-1)
+            if(arr[m]<x):
+                f=f0
+                f0=f1
+                f1=f-f0
+                d=m
+            elif(arr[m]>x):
+                f=f0
+                f0=f0-f1
+                f1=f-f0
+            else:
+                return m
+            if((f0 and arr[d+1])==x):
+                return d+1
+            return -1
+                
+
+n=int(input("Enter no of students who attended training program:"))
+arr=[]
+for i in range(n):
+    ele=int(input("Enter Roll No:"))
+    arr.append(ele)
+arr.sort()    
+print(arr)    
+x=int(input("Enter a roll no whose search is going to happen in register:"))
+s=search(arr)
+flag=0
+while flag==0:
+    print("-----MENU-----")
+    print("1.Linear searching...:")
+    print("2.Sentinal searching....: ")
+    print("3.Binary searching....:")
+    print("4.Fibonacci searching....:")
+    print("5.--END--\n")
+    ch=int(input("Enter your choice from  1 to 5:"))      
+    
+    if ch==1:
+        print(s.linear())
+    elif ch==2:
+        print(s.sentinal())            
+    elif ch==3:
+        print(s.binary())
+    elif ch==4:
+        print("Position of element after fibnoacci search:",s.fibonaaci())
+    elif ch==5:
+        print("Invalid choice")                      
+                
+                        

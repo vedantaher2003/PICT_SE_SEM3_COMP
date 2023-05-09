@@ -1,0 +1,106 @@
+#include <iostream>
+using namespace std;
+
+class Complex
+{
+	int real, img, choice;
+
+public:
+	Complex()
+	{
+		real = 0;
+		img = 0;
+	}
+
+	Complex operator+(Complex c2)
+	{
+		Complex c3;
+		c3.real = real + c2.real;
+		c3.img = img + c2.img;
+		return c3;
+	}
+
+	Complex operator*(Complex c2)
+	{
+		Complex c3;
+		c3.real = real * c2.real - img * c2.img;
+		c3.img = real * c2.img + img * c2.real;
+		return c3;
+	}
+
+	Complex operator-(Complex c2)
+	{
+		Complex c3;
+		c3.real = real - c2.real;
+		c3.img = img - c2.img;
+		return c3;
+	}
+
+	friend ostream &operator<<(ostream &out, Complex &c);
+	friend istream &operator>>(istream &in, Complex &c);
+};
+
+ostream &operator<<(ostream &out, Complex &c)
+{
+	out << "(" << c.real << ")";
+	out << " + (" << c.img << ")i" << endl;
+	return out;
+}
+
+istream &operator>>(istream &is, Complex &c)
+{
+	cout << "Enter the real part:";
+	is >> c.real;
+	cout << "Enter imaginary part:";
+	is >> c.img;
+	return is;
+}
+
+int main()
+{
+	int choice;
+	Complex c1;
+	cout << "Enter 1st complex number: " << endl;
+	cin >> c1;
+	Complex c2;
+	cout << "\nEnter 2nd complex number: " << endl;
+	cin >> c2;
+	cout << "\nthe 1st complex no. is ";
+	cout << c1;
+	cout << "\nthe 2nd complex no. is ";
+	cout << c2;
+	Complex c3;
+	while (1)
+	{
+		cout << endl;
+		cout << "\n\n****************MENU*********************" << endl;
+		cout << "enter 1 to add two complex nos." << endl;
+		cout << "enter 2 to subtract two complex nos." << endl;
+		cout << "enter 3 to multiply two complex nos." << endl;
+		cout << "enter 0 to exit" << endl;
+		cout << "enter your choice: ";
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:
+			c3 = c1 + c2;
+			cout << "Addition= " << c3;
+			break;
+		case 2:
+			c3 = c1 - c2;
+			cout << "Subtraction= " << c3;
+			break;
+		case 3:
+			c3 = c1 * c2;
+			cout << "Multiplication= " << c3;
+			break;
+		case 0:
+			exit(0);
+		default:
+			cout << "Invalid choice!!!";
+			break;
+		}
+	}
+
+	return 0;
+}

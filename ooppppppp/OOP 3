@@ -1,0 +1,146 @@
+#include <iostream>
+#include <bits/stdc++.h>
+
+using namespace std;
+class publication
+{
+public:
+    string title;
+    float price;
+
+    publication() // --default constructor 
+    {
+        cout << "enter title item:" << endl;
+        cin >> title;
+        cout << "Enter price of item:\n";
+        cin >> price;
+    }
+};
+class book : public publication // inheritance 
+{
+    int page_count;
+
+public:
+    book() //: page_count(0) // constructor
+    {
+            cout << "Enter page count of book:" << endl;
+            cin >> page_count;
+       
+    }
+
+    void displayMenu(vector<book> vb) // member function
+    {
+        for (int i = 0; i < vb.size(); i++)
+        {
+            try{
+                if(vb[i].page_count<=0)
+                {
+                    throw page_count;
+                }
+                else{
+                    cout << "\nTitle of Book:" << vb[i].title << endl
+                 << "Price        :" << vb[i].price << endl
+                 << "Page Count   :" << vb[i].page_count << endl;
+            cout << "--------------------------------------------" << endl;
+                }
+            }
+            
+        catch (int num)
+        {
+            cout<<"Exception caught- page count cannot be less than 0."<<endl;
+            page_count = 0;
+            price = 0;
+            title = "";
+        }
+        }// for loop
+    } // member function
+};
+
+class tape : public publication
+{
+    float playing_time;
+
+public:
+    tape() //: publication(string title_of, float price_of)
+    {
+        cout << "Enter playing time of casette:" << endl;
+        cin >> playing_time;
+       
+    }
+   
+
+    void displayMenu(vector<tape> vt)
+    {
+        
+        for (int i = 0; i < vt.size(); i++)
+        {
+        try
+        {
+            if (vt[i].playing_time < 0)
+            {
+                throw vt[i].playing_time;
+            }
+            else{
+                 cout << "\nTitle of Cassette: " << vt[i].title << endl
+                 << "Price: Rs.        :" << vt[i].price << endl
+                 << "Playing Time      :" << vt[i].playing_time << "min." << endl;
+            cout << "--------------------------------------------" << endl;
+        
+            }
+        }
+     catch (int num)
+        {
+            cout<<"Exception caught- playing time cannot be less than 0."<<endl;
+            playing_time = 0;
+            price = 0;
+            title = "";
+        }
+           }
+    }
+};
+int main()
+{
+    vector<book> vb;
+    vector<tape> vt;
+    int option;
+    cout << "\t\tPawar Publications\n";
+    int addItem = 1;
+    while (addItem == 1)
+    {
+        cout << "Choose\n1 Add Book\n2 Add Cassette\n3 Display inventory";
+        cin >> option;
+
+        if (option == 1)
+        {
+            book objb;
+            vb.push_back(objb);
+            cout << "Book has been added." << endl;
+        }
+        else if (option == 2)
+        {
+            tape objt;
+            vt.push_back(objt);
+            cout << "Cassette has been added." << endl;
+        }
+        else if (option == 3)
+        {
+            cout << "\t\tBook Inventory\n"
+                 << "=========================================" << endl;
+
+            vb[0].displayMenu(vb);
+
+            cout << "\t\tTape Inventory\n"
+                 << "=========================================" << endl;
+
+            vt[0].displayMenu(vt);
+        }
+        else
+        {
+            cout << "Invalid Option\n";
+        }
+
+        cout << "\n\nWant to add Item\npress 1 Yes\npress 0 Exit\n";
+        cin >> addItem;
+    }
+    return 0;
+}

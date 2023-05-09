@@ -1,0 +1,175 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+class student
+{
+private:
+    char name[20], dob[20], bloodgrp[20], add[50], teleph[15], lic_no[10];
+    int div, roll;
+    static int count;
+
+public:
+    // default constructor
+    student()
+    {
+        char *name = new char[20];
+        char *dob = new char[20];
+        char *bloodgrp = new char[20];
+        char *add = new char[50];
+        char *teleph = new char[15];
+        char *lic_no = new char[10];
+        div = 0;
+        roll = 0;
+    }
+    // parameterized constructor
+    student(char *name1, int roll_no1, int div1, char *dob1, char *bg, char *address1, char *tel_no1, char *license1)
+    {
+        strcpy(name, name1);
+        roll = roll_no1;
+        div = div1;
+        strcpy(dob, dob1);
+        strcpy(bloodgrp, bg);
+        strcpy(add, address1);
+        strcpy(teleph, tel_no1);
+        strcpy(lic_no, license1);
+        // no_of_student++;
+    }
+    // copy constructor
+    student(const student &s1)
+    {
+        strcpy(name, s1.name);
+        roll = s1.roll;
+        div = s1.div;
+        strcpy(dob, s1.dob);
+        strcpy(bloodgrp, s1.bloodgrp);
+        strcpy(add, s1.add);
+        strcpy(teleph, s1.teleph);
+        strcpy(lic_no, s1.lic_no);
+    }
+    ~student()
+    {
+        cout << "Object destroyed" << endl;
+    }
+    static void show_count() //member 
+    {
+        cout << "\nTotal no. of records: " << count;
+    }
+    friend class info;
+};
+// new class
+class info
+{
+private:
+    float marks, total, per;
+
+public:
+    info() // default constructor
+    {
+        marks = 0.0;
+        total = 0.0;
+        per = 0.0;
+    }
+    inline void percentage()
+    {
+        per = (marks / total) * 100;
+    }
+    void get_data(student *obj);
+    void display(student *obj);
+    friend class student;
+};
+int student::count = 0; //scope resolution operator - access global variable in member function
+void info::get_data(student *obj)
+{
+    cout << "\nEnter name: ";
+    cin >> obj->name;
+    cout << "Enter DOB: ";
+    cin >> obj->dob;
+    cout << "Enter blood group: ";
+    cin >> obj->bloodgrp;
+    cout << "Enter division: ";
+    cin >> obj->div;
+    cout << "Enter roll no.: ";
+    cin >> obj->roll;
+    cout << "Enter contact no.: ";
+    cin >> obj->teleph;
+    cout << "Enter address: ";
+    cin >> obj->add;
+    cout << "Enter license no.: ";
+    cin >> obj->lic_no;
+    cout << "Enter marks got: ";
+    cin >> this->marks;
+    jump:
+    cout << "Enter total marks: ";
+    cin >> this->total;
+    try{
+        if(this->total==0){
+            throw this->total;
+        }
+    }
+    catch(int x){
+        cout<<"Total cannot be zero!!!"<<endl;
+        goto jump;
+    }
+    this->percentage();
+    obj->count++;
+}
+void info::display(student *obj)
+{
+    cout << "\nNAME: " << obj->name << endl;
+    cout << "DATE OF BIRTH: " << obj->dob << endl;
+    cout << "BLOOD GROUP: " << obj->bloodgrp << endl;
+    cout << "DIVISION: " << obj->div << endl;
+    cout << "ROLL NO.: " << obj->roll << endl;
+    cout << "TELEPHONE NO.: " << obj->teleph << endl;
+    cout << "LICENSE NO.: " << obj->lic_no << endl;
+    cout << "ADDRESS: " << obj->add << endl;
+    cout << "MARKS: " << this->marks << endl;
+    cout << "TOTAL: " << this->total << endl;
+    cout << "PERCENTAGE: " << this->per << endl;
+}
+int main()
+{
+    info *s1[30];
+    student *s2[30];
+    int n = 0, ch, i;
+    while(true)
+    {
+        cout << "\nMenu\n";
+        cout << "1.Enter Information\n";
+        cout << "2.Display information: \n";
+        cout << "3.Display total students: \n";
+        cout << "4.Exit";
+        cout << "\nEnter your choice: ";
+        cin >> ch;
+        switch (ch)
+        {
+        case 1:
+            cout << "\nEnter Info";
+            s1[n] = new info;
+            s2[n] = new student;
+            s1[n]->get_data(s2[n]);
+            n++;
+            break;
+        case 2:
+            cout << "\n";
+            for (i = 0; i < n; i++)
+            {
+                s1[i]->display(s2[i]);
+            }
+            break;
+        case 3:
+            student::show_count();
+            break;
+
+        case 4:
+            return 0;
+            break;
+
+        default:
+            cout<<"Enter valid choice!!!"<<endl;
+            break;
+        }
+
+    }
+    return 0;
+}

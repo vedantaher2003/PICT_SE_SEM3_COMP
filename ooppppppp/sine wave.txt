@@ -1,0 +1,63 @@
+#include <iostream>
+#include <GL/glut.h>
+#include <stdlib.h>
+#include <cmath>
+
+using namespace std;
+double x,y,i = 0;
+bool check = true;
+void drawBall(){
+	glutSolidSphere(0.1,50,50);
+}
+void init(void){
+	glClearColor(0.0,0.0,0.0,0.0);
+}
+
+void update(int val){
+	x = i*3.1459/180;
+	y = sin(x);
+	x = x/10;
+	y = y * 0.9;
+	x = x - 1;
+	if (x >= 1){
+		check = false;
+	}
+	if (x <= -1) {
+		check = true;
+	}
+	if (check){
+		i += 0.5;
+	}
+	else {
+		i -= 0.05;
+	}
+	glutPostRedisplay();
+	glutTimerFunc(1,update,0);
+
+}
+
+void display(){
+	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+	glLoadIdentity();
+	glColor3f(0.0,1.0,1.0);
+	glTranslatef(x,y,0);
+	drawBall();
+	glFlush();
+	glutSwapBuffers();
+}
+
+int main(int argc, char ** argv){
+	glutInit(&argc,argv);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	init();
+	glutInitWindowPosition(0,0);
+	glutInitWindowSize(800,800);
+	glutCreateWindow("Bouncing Ball with Sine Wave");
+	glutTimerFunc(1,update,0);
+	glutDisplayFunc(display);
+	glutMainLoop();
+
+	return 0;
+}
+
+

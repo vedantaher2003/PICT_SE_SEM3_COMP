@@ -1,0 +1,60 @@
+#ASS 5 Final
+
+class sorting:
+    def __init__(self, input):
+        self.arr = input
+
+    def insertion(self):
+        for i in range(1, len(arr)):
+            temp = arr[i]
+            j = i - 1
+            while (j >= 0 and arr[j] > temp):
+                arr[j + 1] = arr[j]
+                j -= 1
+            arr[j + 1] = temp
+        return arr
+
+    def shell(self):
+        gap = len(arr) // 2
+        while gap > 0:
+            for i in range(gap, len(arr)):
+                temp = arr[i]
+                j = i
+                while (j >= gap and arr[j - gap] > temp):
+                    arr[j] = arr[j - gap]
+                    j -= gap
+                arr[j] = temp
+            gap = gap // 2
+        return arr
+
+    def top_five(self):
+        n = len(arr)
+        for i in range(n - 1, -1, -1):
+            print(arr[i])
+
+
+n = int(input("No of students in Class:"))
+arr = []
+for i in range(n):
+    ele = float(input("Enter Percentage:"))
+    arr.append(ele)
+s = sorting(arr)
+flag = 0
+while flag == 0:
+    print("-----MENU-----")
+    print("1.Insertion sort...:")
+    print("2.Shell sort....: ")
+    print("3.--END--\n")
+    ch = int(input("Enter your choice from  1 to 3:"))
+
+    if ch == 1:
+        print(s.insertion())
+        print("Top five percentages are: ")
+        s.top_five()
+    elif ch == 2:
+        print(s.shell())
+        print("Top five percentages are: ")
+        s.top_five()
+    elif ch == 3:
+        print("Invalid choice")
+

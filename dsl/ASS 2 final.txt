@@ -1,0 +1,84 @@
+#ASS 2 final
+
+class string_operations:
+    def __init__(self, string):
+        self.string = string
+
+    def longest(self):
+        length = 0
+        str = string + " "
+        wordstr = " "
+        list = []
+        for i in range(len(str)):
+            if (str[i] == " "):
+                list.append(wordstr)
+                wordstr = " "
+            else:
+                wordstr += str[i]
+        for word in list:
+            if (len(wordstr) > length):
+                length = len(word)
+                a = word
+        return a
+
+    def occurence(self, character):
+        count = 0
+        for i in string:
+            if i == character:
+                count += 1
+        return count
+
+    def palindrome(self):
+        for i in range(len(string)):
+            if (string[i] == string[len(string) - i - 1]):
+                continue
+            else:
+                return ("Not a palindrome")
+        return ("Yes a Palindrome")
+
+    def first_app(self, word):
+        if word not in string:
+            return ("Substring not found")
+        else:
+            for i in range(len(string)):
+                if (string[i:i + len(word)] == word):
+                    return (i)
+
+    def countall(self):
+        newstr = " " + self.string + " "
+        l1 = []
+        num = 0
+        for i in range(len(newstr)):
+            if (i != 0 and newstr[i] == " "):
+                l1.append(newstr[num + 1:i])
+                num = i
+        for i in set(l1):
+            print("The word ", i, "appears", l1.count(i), "times in the given string")
+
+
+string = input("Enter a sentence:")
+s1 = string_operations(string)
+flag = 0
+while flag == 0:
+    print("-----MENU-----")
+    print("1.Longest word in the string is :")
+    print("2.Enter the character whose frequency is to be known :")
+    print("3.Enter a word for which you have to check palindrome")
+    print("4.Enter a word for which you want to find first appearance :")
+    print("5.Occurence of each word:")
+    ch = int(input("Enter your choice from  1 to 5:"))
+    if ch == 1:
+        print("Longest word in the string is :", s1.longest())
+    elif ch == 2:
+        character = input("Enter the character whose frequency is to be known :")
+        print("Frequency is ", s1.occurence(character))
+    elif ch == 3:
+        print(s1.palindrome())
+    elif ch == 4:
+        word = input("Enter a word for which you want to find first appearance :")
+        print(s1.first_app(word))
+    elif ch == 5:
+        print(s1.countall())
+    else:
+        print("invalid input")
+

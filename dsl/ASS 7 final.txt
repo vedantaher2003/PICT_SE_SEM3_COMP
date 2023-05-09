@@ -1,0 +1,109 @@
+ASS 7 final
+
+#include<iostream>
+using namespace std;
+
+class node{
+    public:
+    node* prev;
+    char data;
+    node* next;
+    
+
+    node(char data=' '){
+        this->data = data;
+        this->next = prev;
+        this->prev = next;        
+    }
+    
+};
+
+
+
+void makearr(node* &head){
+    
+    node* h= new node();
+    head = h;
+    for(int i=0;i<6;i++){
+        node* temp = new node();
+        h->next = temp;
+        temp->prev =h;
+        h = h->next;
+    }
+    h->next = head;
+    head->prev = h;
+}
+
+void bookSeat(node* head, int pos, char d){
+    pos--;
+    while(pos--){
+        head = head->next;
+    }
+    if(head->data == 'X'){
+        cout<<"already booked"<<endl;
+    }else{
+        head->data = 'X';
+        cout<<"your seat is booked"<<endl;
+    }
+}
+
+void cancelSeat(node* head,int pos){
+     pos--;
+    while(pos--){
+        head = head->next;
+    }
+    if(head->data == 'X'){
+        head->data = ' ';
+        cout<<"booking canceled"<<endl;
+    }else{
+        cout<<"Seat is not booked yet"<<endl;
+    }
+
+
+}
+void print(node* head){
+    node* temp = head;
+
+    do{
+        cout<<"["<<head->data<<"]-";
+        head = head->next;
+    }while(head != temp);
+    cout<<endl;
+}
+int main(){
+    cout<<"SAAAAASSSSSSS 7"<<endl;
+    cout<<"started"<<endl;
+    node* heads[10]={NULL};
+    for(int i =0;i<10;i++){
+        makearr(heads[i]);
+        print(heads[i]);
+    }
+   
+    cout<<"Menu:-\n1)book a seat\n2)Cancel booking\n3)show seats\n4)END "<<endl;
+    
+    while(1){
+        int a;
+        cout<<"\nChoose any :- ";
+        cin>>a;
+        int r, s;
+
+        if(a==1){
+            cout<<"\nEnter row & seat number to be booked :- ";
+            cin>>r>>s;
+            bookSeat(heads[r-1],s,'X');
+        }
+        else if(a==2){
+            cout<<"\nEnter seat to be canceled :- ";
+            cin>>r>>s;
+            cancelSeat(heads[r-1],s);
+        }
+        else if(a==3){
+            cout<<"===============================================\n";
+            for(int i =0;i<10;i++){
+                print(heads[i]);
+            }
+            cout<<"===============================================\n";
+        }else{break;}
+    }
+    cout<< "Hello World"<<endl;
+}
